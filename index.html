@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="app" v-cloak>
-	<div id="loading">Loading...</div>
+	<div id="loading">Wait a second while I load the page...</div>
 	<div class="header">
 		<div class="container">
 			<div class="title">
@@ -42,6 +42,10 @@
 					</div>
 				</div>
 				<div><h4 class="product-title">{{product.title}}</h4>
+					Tags: <span
+						style="padding-top: 2px; padding-bottom: 2px; padding-right: 10px; padding-left: 10px; margin: 3px; background-color: #ffc30f; border-style: solid; border: 1px; border-color: black; border-radius: 12px;"
+						v-for="tag in product.tags">{{tag}}</span>
+
 					<p class="product-price"><strong>{{product.price | currency}}</strong></p>
 					<button v-on:click="addToCart(product)" class="add-to-cart btn">Add to Cart</button>
 				</div>
@@ -75,7 +79,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="/reload/reload.js"></script>
+<!--<script src="/reload/reload.js"></script>-->
 <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
 <script type="text/javascript" src="node_modules/vue-resource/dist/vue-resource.js"></script>
 <script type="text/javascript" src="node_modules/scrollmonitor/scrollMonitor.js"></script>

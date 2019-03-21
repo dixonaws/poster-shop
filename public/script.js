@@ -12,6 +12,7 @@ setTimeout(function () {
 			lastSearch: "",
 			loading: false,
 			results: []
+
 		}, // data()
 
 		created: function () {
@@ -34,9 +35,10 @@ setTimeout(function () {
 
 		methods: {
 			addToCart: function (product) {
-				console.log("addToCart(" + product.id + ")");
+				console.log("addToCart: adding product " + product.id + " to cart");
 
-				this.total += product.price;
+				console.log("summing price is " + product.price);
+				this.total += parseFloat(product.price);
 
 				var found = false;
 				for (var i = 0; i < this.cart.length; i++) {
@@ -50,7 +52,7 @@ setTimeout(function () {
 					this.cart.push({
 						id: product.id,
 						title: product.title,
-						price: product.price,
+						price: parseFloat(product.price),
 						qty: 1
 					});
 
@@ -63,7 +65,7 @@ setTimeout(function () {
 
 				item.qty--;
 
-				this.total -= item.price;
+				this.total -= parseFloat(item.price);
 
 				if (item.qty <= 0) {
 					var i = this.cart.indexOf(item);
@@ -78,14 +80,19 @@ setTimeout(function () {
 				this.results = [];
 				this.loading = true;
 
-				// use vue-resouce to query the API
-				var path = "https://9dyfqj0359.execute-api.us-east-1.amazonaws.com/api/search/".concat(this.search);
+				// use vue-resource to query the API
+				var str_url = "https://9dyfqj0359.execute-api.us-east-1.amazonaws.com/api/search/";
+				var path = str_url.concat(this.search);
+
+				console.log("Using path: " + path);
+
+
 				this.$http.get(path).then(function (response) {
 					setTimeout(function () {
-
 						this.loading = false;
 						this.lastSearch = this.search;
-						if (response.body === null) {
+
+						if (response.body === null || response.body.length==undefined) {
 							console.log("Nothing found!");
 							this.results = [];
 						} else {
@@ -98,6 +105,7 @@ setTimeout(function () {
 				});
 
 			}, // onSubmit()
+
 
 			appendResults: function () {
 				if (this.products.length < this.results.length) {

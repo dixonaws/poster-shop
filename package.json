@@ -23,7 +23,8 @@
     "express": "~4.16.4",
     "scrollmonitor": "^1.2.0",
     "vue": "^2.5.17",
-    "vue-resource": "^1.5.1"
+    "vue-resource": "^1.5.1",
+    "vuetify": "^1.5.5"
   },
   "devDependencies": {
     "eslint": "~5.5.0",
